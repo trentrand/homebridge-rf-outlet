@@ -1,6 +1,6 @@
 {
   "name": "homebridge-rf-outlet",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Radio frequency power outlet accessory plugin for HomeBridge",
   "license": "MIT",
   "keywords": [

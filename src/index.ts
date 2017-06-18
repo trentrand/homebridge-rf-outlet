@@ -33,14 +33,14 @@ class Config {
 class OutletAccessory {
   log: (message: any) => void;
   config: Config;
-  powerState: boolean;
+  powerOnState: boolean;
 
   constructor(log: (message: any) => void, config: Config) {
     // Register accessory information
     this.config = config;
 
     // Register accessory default power state as 'off'
-    this.powerState = false;
+    this.powerOnState = false;
 
     this.log = log;
     this.log("Starting device " + this.config.name + "...");
@@ -48,22 +48,22 @@ class OutletAccessory {
 
   // Get the power state of this outlet
   getPowerState = (callback: any) => {
-    this.log('Power state for ' + this.config.name + ' is ' + this.powerState);
-    callback(null, this.powerState);
+    this.log('Power state for ' + this.config.name + ' is ' + this.powerOnState);
+    callback(null, this.powerOnState);
   }
 
   // Set the power state of this outlet
-  setPowerState = (powerState: boolean, callback: any) => {
-      this.powerState = powerState;
-      this.log("Turning " + this.config.name + " " + (this.powerState == true ? "on" : "off"));
+  setPowerState = (powerOnState: boolean, callback: any) => {
+      this.powerOnState = powerOnState;
+      this.log("Turning " + this.config.name + " " + (this.powerOnState == true ? "on" : "off"));
       callback(null);
   }
 
   // React to the 'identify' HAP-NodeJS Accessory request
   // https://github.com/KhaosT/HAP-NodeJS/blob/master/lib/Accessory.js#L32-L38
   identify = (callback: any) => {
-      this.log(this.config.name + " was identified.");
-      callback();
+    this.log(this.config.name + " was identified.");
+    callback();
   }
 
   // Register this outlets required (and optional) services

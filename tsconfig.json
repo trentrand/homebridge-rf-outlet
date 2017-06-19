@@ -5,6 +5,7 @@
   "compilerOptions": {
     "outDir": "./",
     "noImplicitAny": true,
-    "target": "es5"
+    "target": "es7",
+    "typeRoots": ["node_modules/@types"]
   }
 }

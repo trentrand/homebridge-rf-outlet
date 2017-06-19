@@ -1,5 +1,7 @@
 'use strict';
 
+var exec = require('child_process').exec;
+
 // Example Accessory Configuration (see config-example.json) -
 //   {
 //     "accessory": "Outlet",
@@ -56,6 +58,9 @@ class OutletAccessory {
   setPowerState = (powerOnState: boolean, callback: any) => {
       this.powerOnState = powerOnState;
       this.log("Turning " + this.config.name + " " + (this.powerOnState == true ? "on" : "off"));
+      exec("pwd", (error: any, stdout: any, stderr: any) => {
+        this.log(stdout);
+      });
       callback(null);
   }
 
@@ -68,7 +73,7 @@ class OutletAccessory {
 
   // Register this outlets required (and optional) services
   getServices = () => {
-    var outletService;
+    var outletService: any;
     if (this.config.type == "Light")  {
       outletService = new Service.Lightbulb(this.config.name);
       // Bind state value to required Lightbulb charactertisics

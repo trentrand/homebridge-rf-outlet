@@ -17,7 +17,7 @@ After installing homebridge globally, install this plugin with
 
 Add one accessory to your `config.json` for each individual radio frequency power outlet you'd like to control.
 
-### Example config.json
+##### Example config.json
 
 ```json
 {

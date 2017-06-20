@@ -1,6 +1,7 @@
 'use strict';
 
-var exec = require('child_process').exec;
+var async = require("async");
+var rcswitch = require('rcswitch');
 
 // Example Accessory Configuration (see config-example.json) -
 //   {
@@ -15,6 +16,10 @@ var exec = require('child_process').exec;
 //   }
 
 let Service: any, Characteristic: any;
+
+interface Callback {
+  (error: any, stdout: any, stderr: any): void;
+}
 
 export = function (homebridge: any) {
   Service = homebridge.hap.Service;
@@ -44,9 +49,16 @@ class OutletAccessory {
     // Register accessory default power state as 'off'
     this.powerOnState = false;
 
+    // Send RF data output to Pin 0
+    rcswitch.enableTransmit(0);
+
     this.log = log;
     this.log("Starting device " + this.config.name + "...");
   }
+
+  queue = async.queue(function(rf_code: string, callback: Callback) {
+    this.rcswitch.send(rf_code);
+  }, 1);
 
   // Get the power state of this outlet
   getPowerState = (callback: any) => {
@@ -58,9 +70,10 @@ class OutletAccessory {
   setPowerState = (powerOnState: boolean, callback: any) => {
       this.powerOnState = powerOnState;
       this.log("Turning " + this.config.name + " " + (this.powerOnState == true ? "on" : "off"));
-      exec("pwd", (error: any, stdout: any, stderr: any) => {
-        this.log(stdout);
-      });
+
+      var rf_code = this.powerOnState ? this.config.rf_on : this.config.rf_off;
+      this.queue.push(rf_code);
+
       callback(null);
   }
 

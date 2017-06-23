@@ -6,12 +6,8 @@
     "outDir": "./",
     "noImplicitAny": true,
     "target": "es5",
-<<<<<<< HEAD
     "typeRoots": [
       "node_modules/@types"
     ]
-=======
-    "typeRoots": ["node_modules/@types"]
->>>>>>> origin/master
   }
 }

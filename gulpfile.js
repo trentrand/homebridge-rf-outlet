@@ -13,8 +13,10 @@ gulp.task('clean', function() {
     .pipe(clean({ force: true }));
 });
 
-gulp.task('default', ['clean'], function () {
-    return tsProject.src()
-        .pipe(tsProject())
-        .js.pipe(gulp.dest(tsConfig.compilerOptions.outDir));
+gulp.task('compile', ['clean'], function() {
+  return tsProject.src()
+    .pipe(tsProject())
+    .js.pipe(gulp.dest(tsConfig.compilerOptions.outDir));
 });
+
+gulp.task('default', ['clean', 'compile']);

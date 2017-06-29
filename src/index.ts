@@ -1,6 +1,6 @@
 'use strict';
 
-var async = require("async");
+var async = require('async');
 var rcswitch = require('rcswitch');
 
 // Example Accessory Configuration (see config-example.json) -
@@ -57,7 +57,7 @@ class OutletAccessory {
   }
 
   queue = async.queue(function(rf_code: string, callback: Callback) {
-    this.rcswitch.send(rf_code);
+    rcswitch.send(rf_code);
   }, 1);
 
   // Get the power state of this outlet

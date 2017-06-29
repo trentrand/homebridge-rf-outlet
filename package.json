@@ -28,10 +28,10 @@
     "homebridge": "^0.4.20"
   },
   "devDependencies": {
-    "@types/node": "7.0.7",
+    "@types/node": "^7.0.7",
     "gulp": "^3.9.1",
-    "gulp-typescript": "^3.1.7",
     "gulp-clean": "^0.3.2",
+    "gulp-typescript": "^3.1.7",
     "typescript": "^2.4.0"
   }
 }

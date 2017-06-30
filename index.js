@@ -1,6 +1,6 @@
 'use strict';
 var async = require('async');
-var rcswitch = require('rcswitch');
+var rpi433 = require('rpi-433');
 // Example Accessory Configuration (see config-example.json) -
 //   {
 //     "accessory": "Outlet",
@@ -9,8 +9,8 @@ var rcswitch = require('rcswitch');
 //     "manufacturer": "Ikea",
 //     "model": "SKEBY Lamp",
 //     "serial": "",
-//     "rf_on": 4480259,
-//     "rf_off": 4480268
+//     "rf_on": 4265267,
+//     "rf_off": 4265276
 //   }
 var Service, Characteristic;
 var Config = (function () {
@@ -25,9 +25,11 @@ var Config = (function () {
 var OutletAccessory = (function () {
     function OutletAccessory(log, config) {
         var _this = this;
-        this.queue = async.queue(function (rf_code, callback) {
-            rcswitch.send(rf_code);
-        }, 1);
+        // queue = async.queue(function(rf_code: string, callback: Callback) {
+        //   this.rfEmitter.sendCode(rf_code, (error: any, stdout: any) => {   //Send 1234
+        //     if(!error) this.log('Sent code:\t' + stdout);
+        //   });
+        // }, 1);
         // Get the power state of this outlet
         this.getPowerState = function (callback) {
             _this.log('Power state for ' + _this.config.name + ' is ' + _this.powerOnState);
@@ -38,7 +40,11 @@ var OutletAccessory = (function () {
             _this.powerOnState = powerOnState;
             _this.log("Turning " + _this.config.name + " " + (_this.powerOnState == true ? "on" : "off"));
             var rf_code = _this.powerOnState ? _this.config.rf_on : _this.config.rf_off;
-            _this.queue.push(rf_code);
+            _this.rfEmitter.sendCode(rf_code, function (error, stdout) {
+                if (!error)
+                    _this.log('Sent code:\t' + stdout);
+            });
+            // this.queue.push(rf_code);
             callback(null);
         };
         // React to the 'identify' HAP-NodeJS Accessory request
@@ -67,8 +73,10 @@ var OutletAccessory = (function () {
         this.config = config;
         // Register accessory default power state as 'off'
         this.powerOnState = false;
-        // Send RF data output to Pin 0
-        rcswitch.enableTransmit(0);
+        this.rfEmitter = rpi433.emitter({
+            pin: 0,
+            pulseLength: 180
+        });
         this.log = log;
         this.log("Starting device " + this.config.name + "...");
     }

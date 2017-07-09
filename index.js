@@ -35,8 +35,7 @@ var OutletAccessory = (function () {
             _this.log("Turning " + _this.config.name + " " + (_this.powerOnState == true ? "on" : "off"));
             var rf_code = _this.powerOnState ? _this.config.rf_on : _this.config.rf_off;
             _this.rfEmitter.sendCode(rf_code, function (error, stdout) {
-                if (!error)
-                    _this.log('Sent code:\t' + stdout);
+                _this.log(error ? 'Failed: ' + error : 'Sent ' + stdout);
             });
             callback(null);
         };

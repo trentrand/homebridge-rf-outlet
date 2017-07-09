@@ -72,7 +72,7 @@ class OutletAccessory {
     var rf_code = this.powerOnState ? this.config.rf_on : this.config.rf_off;
 
     this.rfEmitter.sendCode(rf_code, (error: any, stdout: any) => {
-        this.log((error ? 'Failed to send code: \t': 'Sent code:\t') + stdout);
+        this.log(error ? 'Failed: ' + error: 'Sent '+ stdout);
     });
 
     callback(null);

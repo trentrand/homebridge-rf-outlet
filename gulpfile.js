@@ -14,9 +14,9 @@ gulp.task('clean', function() {
 });
 
 gulp.task('compile', ['clean'], function() {
-  return tsProject.src()
+  return gulp.src('src/**/*.ts')
     .pipe(tsProject())
-    .js.pipe(gulp.dest(tsConfig.compilerOptions.outDir));
+    .pipe(gulp.dest(tsConfig.compilerOptions.outDir));
 });
 
 gulp.task('default', ['clean', 'compile']);

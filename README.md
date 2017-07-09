@@ -1,6 +1,6 @@
 # Homebridge RF Outlet (Accessory Plugin)
 
-This is an accessory plugin for [Homebridge](https://github.com/nfarina/homebridge) providing an interface to manage and control radio frequency (433 Mhz by default) power outlets.
+This is an accessory plugin for [Homebridge](https://github.com/nfarina/homebridge) providing an interface to manage and control 433Mhz radio frequency power outlets.
 
 ## Example (standalone) usage
 

@@ -1,7 +1,7 @@
 'use strict';
 
-var async = require('async');
 var rpi433 = require('rpi-433');
+
 // Example Accessory Configuration (see config-example.json) -
 //   {
 //     "accessory": "Outlet",
@@ -58,12 +58,6 @@ class OutletAccessory {
     this.log("Starting device " + this.config.name + "...");
   }
 
-  // queue = async.queue(function(rf_code: string, callback: Callback) {
-  //   this.rfEmitter.sendCode(rf_code, (error: any, stdout: any) => {   //Send 1234
-  //     if(!error) this.log('Sent code:\t' + stdout);
-  //   });
-  // }, 1);
-
   // Get the power state of this outlet
   getPowerState = (callback: any) => {
     this.log('Power state for ' + this.config.name + ' is ' + this.powerOnState);
@@ -80,7 +74,6 @@ class OutletAccessory {
     this.rfEmitter.sendCode(rf_code, (error: any, stdout: any) => {
         this.log((error ? 'Failed to send code: \t': 'Sent code:\t') + stdout);
     });
-    // this.queue.push(rf_code);
 
     callback(null);
   }

@@ -1,5 +1,4 @@
 'use strict';
-var async = require('async');
 var rpi433 = require('rpi-433');
 // Example Accessory Configuration (see config-example.json) -
 //   {
@@ -25,11 +24,6 @@ var Config = (function () {
 var OutletAccessory = (function () {
     function OutletAccessory(log, config) {
         var _this = this;
-        // queue = async.queue(function(rf_code: string, callback: Callback) {
-        //   this.rfEmitter.sendCode(rf_code, (error: any, stdout: any) => {   //Send 1234
-        //     if(!error) this.log('Sent code:\t' + stdout);
-        //   });
-        // }, 1);
         // Get the power state of this outlet
         this.getPowerState = function (callback) {
             _this.log('Power state for ' + _this.config.name + ' is ' + _this.powerOnState);
@@ -44,7 +38,6 @@ var OutletAccessory = (function () {
                 if (!error)
                     _this.log('Sent code:\t' + stdout);
             });
-            // this.queue.push(rf_code);
             callback(null);
         };
         // React to the 'identify' HAP-NodeJS Accessory request

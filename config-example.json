@@ -5,12 +5,12 @@
     "port": 51826,
     "pin": "380-81-301"
   },
-  "description": "Self-contained HomeKit server for controlling wireless electrical outlets over radio frequency",
+  "description": "Homebridge",
   "accessories": [
     {
       "accessory": "Outlet",
-      "name": "Lamp",
       "type": "Light",
+      "name": "Lamp",
       "manufacturer": "Ikea",
       "model": "SKEBY Lamp",
       "serial": "",

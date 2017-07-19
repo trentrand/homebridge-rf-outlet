@@ -1,6 +1,6 @@
 {
   "name": "homebridge-rf-outlet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Radio frequency power outlet accessory plugin for HomeBridge",
   "license": "MIT",
   "keywords": [
@@ -11,6 +11,9 @@
     "radio frequency",
     "433Mhz"
   ],
+  "scripts": {
+    "preinstall" : "sudo apt-get install wiringpi lsof"
+  },
   "engines": {
     "node": ">=0.12.0",
     "homebridge": "^0.4.20"

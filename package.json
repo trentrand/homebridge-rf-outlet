@@ -1,8 +1,11 @@
 {
   "name": "homebridge-rf-outlet",
-  "version": "1.0.1",
-  "description": "Radio frequency power outlet accessory plugin for HomeBridge",
+  "version": "1.0.3",
   "license": "MIT",
+  "description": "Radio frequency power outlet accessory plugin for HomeBridge",
+  "author": {
+    "name": "Trent Rand <contact@trentrand.com>"
+  },
   "keywords": [
     "homebridge-plugin",
     "HomeKit",
@@ -14,17 +17,6 @@
   "scripts": {
     "preinstall" : "sudo apt-get install wiringpi lsof"
   },
-  "engines": {
-    "node": ">=0.12.0",
-    "homebridge": "^0.4.20"
-  },
-  "author": {
-    "name": "Trent Rand <contact@trentrand.com>"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/trentrand/homebridge-rf-outlet.git"
-  },
   "dependencies": {
     "homebridge": "^0.4.22",
     "rpi-433": "^2.1.0"
@@ -35,5 +27,16 @@
     "gulp-clean": "^0.3.2",
     "gulp-typescript": "^3.1.7",
     "typescript": "^2.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/trentrand/homebridge-rf-outlet.git"
+  },
+  "config": {
+    "unsafe-perm":true
+  },
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": "^0.4.20"
+  },
 }
